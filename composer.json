@@ -1,0 +1,12 @@
+{
+    "name": "bibsdb/sonderborg-calendar-bundle",
+    "description": "Bibsdb sonderborg-calendar template.",
+    "type": "symfony-bundle",
+    "require": {
+    },
+    "autoload": {
+        "psr-4": {
+            "Bibsdb\\SonderborgCalendarBundle\\": ""
+        }
+    }
+}

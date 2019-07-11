@@ -1,0 +1,9 @@
+assets:
+  js_prod:
+  - bundles/bibsdbsonderborgcalendar/assets/build/bibsdbsonderborgcalendar.js
+modules:
+  toolsModule:
+    files:
+      - bundles/bibsdbsonderborgcalendar/apps/toolsModule/sonderborg-calendar-displayitems.js
+      - bundles/bibsdbsonderborgcalendar/apps/toolsModule/sonderborg-calendar-editor.js
+apps:
