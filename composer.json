@@ -2,6 +2,7 @@
     "name": "bibsdb/sonderborg-calendar-bundle",
     "description": "Bibsdb sonderborg-calendar template.",
     "type": "symfony-bundle",
+    "minimum-stability": "dev",
     "require": {
     },
     "autoload": {
