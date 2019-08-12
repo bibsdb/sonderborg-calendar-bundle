@@ -1,11 +1,10 @@
-<!-- Manual calendar editor -->
-<div class="edit-menu--content-calendar is-visible" role="banner">
-  <div class="edit-menu--content-inner">
+<div class="edit-menu--background" role="banner">
+  <div class="edit-menu--background-inner">
     <div class="edit-menu--toggle-icon" data-ng-click="close()">
       <div class="svg-clickable">
-        <object data="images/svg/cancel.svg" type="image/svg+xml">
+        <object data="bundles/os2displaydefaulttemplate/assets/images/cancel.svg" type="image/svg+xml">
           <!-- Fallback (ie8)-->
-          <img src="images/cancel.png" />
+          <img src="bundles/os2displaydefaulttemplate/assets/images/cancel.png"/>
         </object>
       </div>
     </div>
@@ -15,23 +14,23 @@
         <div class="edit-menu--calendar-date-template">
           <div class="edit-menu--calendar-form-element-wrapper">
             <label class="edit-menu--calendar-label">Titel</label>
-            <input class="edit-menu--calendar-form-element" type="text" placeholder="Besøg i botanisk have" data-ng-model="addevent.title">
+            <input class="edit-menu--calendar-form-element" type="text" placeholder="Besøg i botanisk have" data-ng-model="newEvent.title">
           </div>
           <div class="edit-menu--calendar-form-element-wrapper">
             <label class="edit-menu--calendar-label">Sted</label>
-            <input class="edit-menu--calendar-form-element" type="text" placeholder="Botanisk have" data-ng-model="addevent.place">
+            <input class="edit-menu--calendar-form-element" type="text" placeholder="Botanisk have" data-ng-model="newEvent.place">
           </div>
           <div class="edit-menu--calendar-form-element-wrapper">
             <label class="edit-menu--calendar-label">Fra</label>
-            <input class="edit-menu--calendar-form-element-date" datetime-picker="" type="text" placeholder="15/05/2020 - 12.00" data-ng-model="addevent.from">
+            <input class="edit-menu--calendar-form-element-date" datetime-picker="" type="text" placeholder="15/05/2020 - 12.00" data-ng-model="newEvent.from">
           </div>
           <div class="edit-menu--calendar-form-element-wrapper">
             <label class="edit-menu--calendar-label">Til</label>
-            <input class="edit-menu--calendar-form-element-date" datetime-picker="" type="text" placeholder="15/05/2020 - 12.00" data-ng-model="addevent.to">
+            <input class="edit-menu--calendar-form-element-date" datetime-picker="" type="text" placeholder="15/05/2020 - 12.00" data-ng-model="newEvent.to">
           </div>
           <div class="edit-menu--calendar-form-element-wrapper-link">
-            <div class="edit-menu--calendar-add-date" data-ng-click="addEventItem()" data-ng-disabled="addevent.from > addevent.to" data-ng-class="{'is-inactive': addevent.from > addevent.to}">
-              <img src="images/icons/plus-icon.png">
+            <div class="edit-menu--calendar-add-date" data-ng-click="newEventItem()" data-ng-disabled="newEvent.from > newEvent.to" data-ng-class="{'is-inactive': newEvent.from > newEvent.to}">
+              <img src="bundles/os2displaydefaulttemplate/assets/images/plus-icon.png">
             </div>
           </div>
         </div>
@@ -51,7 +50,7 @@
             </div>
             <div class="edit-menu--calendar-form-element-wrapper-link">
               <div class="edit-menu--calendar-remove-date" data-ng-click="removeEventItem(event)">
-                <img src="images/icons/minus-icon.png">
+                <img src="bundles/os2displaydefaulttemplate/assets/images/minus-icon.png">
               </div>
               <span class="edit-menu--calendar-remove-date-notice" data-ng-class="{'is-outdated': eventIsOutdated(event)}">Forældet!</span>
             </div>
