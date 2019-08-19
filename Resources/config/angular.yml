@@ -1,10 +1,15 @@
 assets:
+  js:
+    - bundles/bibsdbsonderborgcalendar/assets/libs/angular-filter.min.js
   js_prod:
-  - bundles/bibsdbsonderborgcalendar/assets/build/bibsdbsonderborgcalendar.js
+    - bundles/bibsdbsonderborgcalendar/assets/build/bibsdbsonderborgcalendar.js
+
 modules:
   toolsModule:
     files:
       - bundles/bibsdbsonderborgcalendar/apps/toolsModule/sonderborg-calendar-displayitems.js
       - bundles/bibsdbsonderborgcalendar/apps/toolsModule/sonderborg-calendar-editor.js
       - bundles/bibsdbsonderborgcalendar/apps/toolsModule/filters/groupedEvents.js
+    dependencies:
+      - angular.filter
 apps:
