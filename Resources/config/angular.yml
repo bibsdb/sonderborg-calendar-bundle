@@ -6,4 +6,5 @@ modules:
     files:
       - bundles/bibsdbsonderborgcalendar/apps/toolsModule/sonderborg-calendar-displayitems.js
       - bundles/bibsdbsonderborgcalendar/apps/toolsModule/sonderborg-calendar-editor.js
+      - bundles/bibsdbsonderborgcalendar/apps/toolsModule/filters/groupedEvents.js
 apps:

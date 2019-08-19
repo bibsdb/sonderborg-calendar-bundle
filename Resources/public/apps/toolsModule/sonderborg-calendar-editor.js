@@ -12,7 +12,11 @@ angular.module('toolsModule').directive('sonderborgCalendarEditor', function(){
           "title": null,
           "place": null,
           "from": null,
-          "to": null
+          "to": null,
+          "groupbydate": null, 
+          "displaytime": null, 
+          "mFrom": null,
+          "mTo": null
         };
       }
       resetInputEvent();
@@ -28,6 +32,13 @@ angular.module('toolsModule').directive('sonderborgCalendarEditor', function(){
         resetInputEvent();
       };
 
+           /**
+       * Add event to slide
+       */
+      scope.groupByHeader = function groupByHeader() {
+        return "hello";
+      };
+
       /**
        * Remove event from slide.
        */
@@ -39,6 +50,7 @@ angular.module('toolsModule').directive('sonderborgCalendarEditor', function(){
        * Sort events for slide.
        */
       scope.sortEvents = function sortEvents() {
+        console.log("sort");
         if (scope.slide.options.eventitems.length > 0) {
           // Sort the events by from date.
           scope.slide.options.eventitems = $filter('orderBy')(scope.slide.options.eventitems, "from")
