@@ -15,7 +15,7 @@ angular.module('toolsModule').filter('groupedEvents', function () {
     if (!angular.isArray(items)) {
       return false
     }
-     console.log('hej');
+
     // Get current time.
     var currentTime = parseInt(Date.now() / 1000);
 
@@ -50,7 +50,7 @@ angular.module('toolsModule').filter('groupedEvents', function () {
     var events = [];
 
     
-    console.log(max.format('DD-MM-YYYY'));
+
 
 
      // Loop through the range from min to max adding one day at the time
@@ -61,33 +61,37 @@ angular.module('toolsModule').filter('groupedEvents', function () {
           lastDay : '[I går]',
           sameDay : '[I dag]',
           nextDay : '[I morgen]',
-          lastWeek : 'ddd [d.] Do MMMM',
-          nextWeek : 'ddd [d.] Do MMMM',
-          sameElse : 'ddd [d.] Do MMMM'
+          lastWeek : 'dddd Do MMMM',
+          nextWeek : 'dddd Do MMMM',
+          sameElse : 'dddd Do MMMM'
       })
 
       // Find events that are active on the date d. and add them to eventsarr
       // Events kan be added multiple times with different groupbydate header
       for (var i = 0; i < ref.length; i++) {
         var item = ref[i];
-        item.groupbydate = header;
+        
 
 
         // Calculate event duration.
-        if (item.from && item.to && d.isBetween(item.mFrom, item.mTo)) {
-          console.log(item.title);
-          console.log(d.format('DD-MM-YYYY'));
-          console.log(item.mFrom.format('DD-MM-YYYY'));
-          console.log(item.mTo.format('DD-MM-YYYY'));
-          item.displaytime = item.mFrom.format('HH:mm') + item.mTo.format('[ - ] HH:mm');
-          events.push(item);
-        }
-        else if (item.from && d.isSame(item.mFrom, 'day')) {
+        if (item.from && item.to && d.isBetween(item.mFrom, item.mTo, 'day', [])) {
+
           //console.log(item.title);
           //console.log(d.format('DD-MM-YYYY'));
           //console.log(item.mFrom.format('DD-MM-YYYY'));
           //console.log(item.mTo.format('DD-MM-YYYY'));
+          item.displaytime = item.mFrom.format('HH:mm') + item.mTo.format('[ - ] HH:mm');
+          item.groupbydate = header;
+          events.push(item);
+        }
+        else if (item.from && d.isSame(item.mFrom, 'day')) {
+          console.log(item.title);
+          console.log(d.format('DD-MM-YYYY'));
+          console.log(item.mFrom.format('DD-MM-YYYY'));
+          //console.log(item.mTo.format('DD-MM-YYYY'));
+          console.log(item.groupbydate);
           item.displaytime = item.mFrom.format('HH:mm');
+          item.groupbydate = header;
           events.push(item);
         }
       }
@@ -95,7 +99,9 @@ angular.module('toolsModule').filter('groupedEvents', function () {
 
     }
 
-    console.log(events);
+    //console.log(events);
+    console.log("hej");
+    console.log(events[3].groupbydate);
     return events;
   };
 });
