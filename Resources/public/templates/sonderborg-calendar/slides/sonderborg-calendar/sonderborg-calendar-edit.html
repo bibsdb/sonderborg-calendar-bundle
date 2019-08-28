@@ -2,24 +2,28 @@
   <div class="manual-calendar--text-inner">
     <textarea auto-grow class="manual-calendar--header has-placeholder" data-ng-trim="false" placeholder="Tilføj en overskrift" data-ng-model="ikSlide.options.headline" spellcheck="false" data-ng-style="{'color': ikSlide.options.textcolor}">
     </textarea>
-    <div class="manual-calendar--events" data-ng-init="day_index = 0">
-      <div class="manual-calendar--event" data-ng-repeat="(key, value) in (actualEvents = (ikSlide.options.eventitems | groupedEvents | groupBy : 'groupbydate' | limitTo : ikSlide.options.displayitems))">
-        <header class="manual-calendar--day">
-          <b>{{key}}</b>
-        </header>
-        <div ng-repeat="event in value">
-          <div class="manual-calendar--row" data-ng-class="$even ? 'manual-calendar--row-1' : 'manual-calendar--row-2'">
-          <section class="manual-calendar--time">
-            <span class="manual-calendar--to">{{event.displaytime}}</span> 
-          </section>
-          <section class="manual-calendar--title">
-            {{event.title}}
-          </section>
-          <section class="manual-calendar--place">
-            {{event.place}}
-          </section>
+    <div class="manual-calendar--events">
+        <div data-ng-repeat="header in ikSlide.options.headers">
+          <header class="manual-calendar--day">
+            <b>{{header * 1000 | date:'EEEE d. MMMM'}}</b>
+          </header>
+          <div class="manual-calendar--event" data-ng-repeat="event in (actualEvents = (ikSlide.options.eventitems | activeEvents | orderBy: 'from' | limitTo : ikSlide.options.displayitems))">
+            <div data-ng-repeat="eventdate in event.dateheaders">
+              <div ng-if="eventdate === header" class="manual-calendar--row" data-ng-class="$even ? 'manual-calendar--row-1' : 'manual-calendar--row-2'">
+                <section class="manual-calendar--time">
+                  <span class="manual-calendar--to">{{event.displaytime}}</span> 
+                </section>
+                <section class="manual-calendar--title">
+                  {{event.title}}
+                </section>
+                <section class="manual-calendar--place">
+                  {{event.place}}
+                </section>
+              </div>
+            </div>
+          </div>
         </div>
-        </div>
-      </div>
+    </div>
   </div>
 </div>
+

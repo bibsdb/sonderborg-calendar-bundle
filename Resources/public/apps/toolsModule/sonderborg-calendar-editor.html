@@ -1,6 +1,6 @@
 <div class="edit-menu--background" role="banner">
   <div class="edit-menu--background-inner">
-    <div class="edit-menu--toggle-icon" data-ng-click="close()">
+    <div class="edit-menu--toggle-icon" data-ng-click="createEventHeaders(); close()">
       <div class="svg-clickable">
         <object data="bundles/os2displaydefaulttemplate/assets/images/cancel.svg" type="image/svg+xml">
           <!-- Fallback (ie8)-->
@@ -43,10 +43,10 @@
               <input class="edit-menu--calendar-form-element" type="text" data-ng-model="event.place">
             </div>
             <div class="edit-menu--calendar-form-element-wrapper">
-              <input class="edit-menu--calendar-form-element-date" datetime-picker="" type="text" data-ng-model="event.from">
+              <input class="edit-menu--calendar-form-element-date" datetime-picker="" type="text" data-ng-model="event.from" data-ng-change="setCalcProp(event)">
             </div>
             <div class="edit-menu--calendar-form-element-wrapper">
-              <input class="edit-menu--calendar-form-element-date" datetime-picker="" type="text" data-ng-model="event.to">
+              <input class="edit-menu--calendar-form-element-date" datetime-picker="" type="text" data-ng-model="event.to" data-ng-change="setCalcProp(event)">
             </div>
             <div class="edit-menu--calendar-form-element-wrapper-link">
               <div class="edit-menu--calendar-remove-date" data-ng-click="removeEventItem(event)">

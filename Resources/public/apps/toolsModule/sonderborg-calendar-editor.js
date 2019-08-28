@@ -13,10 +13,8 @@ angular.module('toolsModule').directive('sonderborgCalendarEditor', function(){
           "place": null,
           "from": null,
           "to": null,
-          "groupbydate": null, 
+          "dateheaders": null, 
           "displaytime": null, 
-          "mFrom": null,
-          "mTo": null
         };
       }
       resetInputEvent();
@@ -25,18 +23,13 @@ angular.module('toolsModule').directive('sonderborgCalendarEditor', function(){
        * Add event to slide
        */
       scope.newEventItem = function newEventItem() {
-        console.log(scope.slide.options.eventitems);
+        console.log("new");
         // Add event data to slide array.
-        scope.slide.options.eventitems.push(angular.copy(scope.newEvent));
-
+        
+        var event = scope.setCalcProp(angular.copy(scope.newEvent));
+        scope.slide.options.eventitems.push(event);
         resetInputEvent();
-      };
 
-           /**
-       * Add event to slide
-       */
-      scope.groupByHeader = function groupByHeader() {
-        return "hello";
       };
 
       /**
@@ -47,14 +40,60 @@ angular.module('toolsModule').directive('sonderborgCalendarEditor', function(){
       };
 
       /**
-       * Sort events for slide.
+       * Create the text that is shown in template to tell people when the event starts and stops.
        */
-      scope.sortEvents = function sortEvents() {
-        console.log("sort");
-        if (scope.slide.options.eventitems.length > 0) {
-          // Sort the events by from date.
-          scope.slide.options.eventitems = $filter('orderBy')(scope.slide.options.eventitems, "from")
+      scope.setCalcProp = function setCalcProp(event) {
+
+        if (event.from && event.to) {          
+          
+          // Dateheaders contains alle the dates the event is covering as unix-timestamps
+          event.dateheaders = [];
+          // Throw away timepart
+          var i = moment.unix(event.from).startOf('day');
+
+          while(i <= moment.unix(event.to)) {
+            //push the as unix-timestamp without the timepart
+            event.dateheaders.push(i.unix());
+            i.add(1, 'd');
+          }
+
+          event.displaytime = (moment.unix(event.from)).format('HH:mm') + (moment.unix(event.to)).format('[ - ] HH:mm');
+
+          
+
         }
+        else if (event.from) {
+          event.displaytime = (moment.unix(event.from)).format('HH:mm');
+
+          var i = (moment.unix(event.from)).startOf('day');
+          //push the as unix-timestamp without the timepart
+          event.dateheaders = [i.unix()];
+        }
+        return event;
+      };
+
+      /**
+       * Create an array of date-headers that are used to group events by in template.
+       */
+      scope.createEventHeaders = function createEventHeaders() {
+        var events = scope.slide.options.eventitems;
+        console.log(events);
+        var headers = [];
+   
+        for (var i = 0; i < events.length; i++) {  
+          var event = events[i];
+          if (event && event.dateheaders) {
+            headers = headers.concat(event.dateheaders);
+          }
+        }
+
+        // Remove duplicate dates
+        var unique = headers.filter((v, i, a) => a.indexOf(v) === i);
+
+        // Sort dates
+        var sorted = unique.sort(function(a,b){return a-b;});      
+        scope.slide.options.headers = sorted;
+        console.log(scope.slide.options.headers);
       };
 
       /**
@@ -69,7 +108,7 @@ angular.module('toolsModule').directive('sonderborgCalendarEditor', function(){
       };
 
       // Run sorting of events.
-      scope.sortEvents();
+      //scope.sortEvents();
     },
     templateUrl: '/bundles/bibsdbsonderborgcalendar/apps/toolsModule/sonderborg-calendar-editor.html'
   };
