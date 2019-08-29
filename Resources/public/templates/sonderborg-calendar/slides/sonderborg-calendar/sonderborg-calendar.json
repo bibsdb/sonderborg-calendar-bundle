@@ -8,7 +8,7 @@
     "edit": "sonderborg-calendar-edit.html",
     "preview": "sonderborg-calendar.html",
     "css": "sonderborg-calendar.css",
-    "js": "bundles/bibsdbsonderborgcalendar/templates/js/baseSlide.js"
+    "js": "bundles/bibsdbsonderborgcalendar/templates/js/calendarBaseSlide.js"
   },
   "orientation": "portrait",
   "slide_type": "base",
