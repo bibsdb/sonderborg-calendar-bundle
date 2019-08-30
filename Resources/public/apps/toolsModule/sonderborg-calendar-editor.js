@@ -40,6 +40,18 @@ angular.module('toolsModule').directive('sonderborgCalendarEditor', function(){
       };
 
       /**
+       * Set default-value af newEvent.to to newEvent.from
+       */
+      scope.setDefaultDate = function setDefaultDate() {
+        var from = angular.element('#new-event-from').val();
+        var to = angular.element('#new-event-to').val();
+
+        if (from) {
+          angular.element('#new-event-to').datetimepicker({startDate: from, minDate: from});
+        }
+      };
+
+      /**
        * Create the text that is shown in template to tell people when the event starts and stops.
        */
       scope.setCalcProp = function setCalcProp(event) {
@@ -69,6 +81,7 @@ angular.module('toolsModule').directive('sonderborgCalendarEditor', function(){
           //push the as unix-timestamp without the timepart
           event.dateheaders = [i.unix()];
         }
+        console.log(event);
         return event;
       };
 
@@ -77,7 +90,6 @@ angular.module('toolsModule').directive('sonderborgCalendarEditor', function(){
        */
       scope.createEventHeaders = function createEventHeaders() {
         var events = scope.slide.options.eventitems;
-        console.log(events);
         var headers = [];
    
         for (var i = 0; i < events.length; i++) {  
@@ -93,7 +105,6 @@ angular.module('toolsModule').directive('sonderborgCalendarEditor', function(){
         // Sort dates
         var sorted = unique.sort(function(a,b){return a-b;});      
         scope.slide.options.headers = sorted;
-        console.log(scope.slide.options.headers);
       };
 
       /**

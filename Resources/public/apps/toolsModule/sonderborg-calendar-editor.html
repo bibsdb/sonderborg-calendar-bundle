@@ -22,11 +22,11 @@
           </div>
           <div class="edit-menu--calendar-form-element-wrapper">
             <label class="edit-menu--calendar-label">Fra</label>
-            <input class="edit-menu--calendar-form-element-date" datetime-picker="" type="text" placeholder="15/05/2020 - 12.00" data-ng-model="newEvent.from">
+            <input id="new-event-from" class="edit-menu--calendar-form-element-date" datetime-picker="" type="text" placeholder="15/05/2020 - 12.00" data-ng-model="newEvent.from" data-ng-change="setDefaultDate(newEvent.from)">
           </div>
           <div class="edit-menu--calendar-form-element-wrapper">
             <label class="edit-menu--calendar-label">Til</label>
-            <input class="edit-menu--calendar-form-element-date" datetime-picker="" type="text" placeholder="15/05/2020 - 12.00" data-ng-model="newEvent.to">
+            <input id="new-event-to" class="edit-menu--calendar-form-element-date" datetime-picker="" type="text" placeholder="15/05/2020 - 12.00" data-ng-model="newEvent.to">
           </div>
           <div class="edit-menu--calendar-form-element-wrapper-link">
             <div class="edit-menu--calendar-add-date" data-ng-click="newEventItem()" data-ng-disabled="newEvent.from > newEvent.to" data-ng-class="{'is-inactive': newEvent.from > newEvent.to}">
