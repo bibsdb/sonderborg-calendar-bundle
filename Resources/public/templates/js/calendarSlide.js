@@ -3,14 +3,14 @@
  */
 
 // Register the function, if it does not already exist.
-if (!window.slideFunctions['base']) {
-  window.slideFunctions['base'] = {
+if (!window.slideFunctions['calendar']) {
+  window.slideFunctions['calendar'] = {
     /**
      * Setup the slide for rendering.
      * @param scope
      *   The slide scope.
      */
-    setup: function setupBaseSlide(scope) {
+    setup: function setupCalendarSlide(scope) {
       var slide = scope.ikSlide;
 
       // Only show first image in array.
@@ -43,8 +43,8 @@ if (!window.slideFunctions['base']) {
      * @param region
      *   The region object.
      */
-    run: function runBaseSlide(slide, region) {
-      region.itkLog.info("Running base slide: " + slide.title);
+    run: function runCalendarSlide(slide, region) {
+      region.itkLog.info("Running calendar slide: " + slide.title);
 
       var duration = slide.duration !== null ? slide.duration : 15;
 
