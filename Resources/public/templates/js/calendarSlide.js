@@ -80,9 +80,6 @@ if (!window.slideFunctions['calendar']) {
        *   All the event-items of the slide. Array.
        */
       var filterEventHeaders = function filterEventHeaders(headers, events) {
-        
-        
-
         var now = new Date();
         var today = (new Date()).setHours(0,0,0,0);
         
@@ -95,11 +92,11 @@ if (!window.slideFunctions['calendar']) {
           }
           // Header is today - do we have an active event or is it too late?
           else if (header == today) {
-            for (var i = 0; i < events.length; i++) {
-              event = events[i];
+            for (var j = 0; j < events.length; j++) {
+              event = events[j];
   
               //Is this event running today? If header is in dateheaders - then yes.
-              if (event.dateheaders.indexOf(headers[i])) {
+              if (event.dateheaders && event.dateheaders.indexOf(headers[i])) {
   
                 // Has event occurred?
                 if (event.from && event.to) {
@@ -121,8 +118,6 @@ if (!window.slideFunctions['calendar']) {
       };
 
       filterEventHeaders(slide.options.headers, slide.options.eventitems)
-
-    
 
       // Wait fadeTime before start to account for fade in.
       region.$timeout(function () {
