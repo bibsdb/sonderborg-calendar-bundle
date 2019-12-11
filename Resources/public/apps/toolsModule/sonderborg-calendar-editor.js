@@ -81,7 +81,6 @@ angular.module('toolsModule').directive('sonderborgCalendarEditor', function(){
           //push the as unix-timestamp without the timepart
           event.dateheaders = [i.unix()];
         }
-        console.log(event);
         return event;
       };
 
@@ -100,10 +99,16 @@ angular.module('toolsModule').directive('sonderborgCalendarEditor', function(){
         }
 
         // Remove duplicate dates
-        var unique = headers.filter((v, i, a) => a.indexOf(v) === i);
+        // Cumbersome approach but other solutions make gulp js fail.
+        var unique = {};
+        headers.forEach(function(i) {
+          if(!unique[i]) {
+            unique[i] = true;
+          }
+        });
 
         // Sort dates
-        var sorted = unique.sort(function(a,b){return a-b;});      
+        var sorted = (Object.keys(unique)).sort(function(a,b){return a-b;});      
         scope.slide.options.headers = sorted;
       };
 
