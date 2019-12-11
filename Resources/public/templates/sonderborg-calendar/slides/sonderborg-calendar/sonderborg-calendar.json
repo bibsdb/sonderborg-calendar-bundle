@@ -11,7 +11,7 @@
     "js": "bundles/bibsdbsonderborgcalendar/templates/js/calendarSlide.js"
   },
   "orientation": "portrait",
-  "slide_type": "base",
+  "slide_type": "calendar",
   "media_type": "image",
   "script_id": "base",
   "ideal_dimensions": {
