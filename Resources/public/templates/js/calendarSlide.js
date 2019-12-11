@@ -44,56 +44,85 @@ if (!window.slideFunctions['calendar']) {
      *   The region object.
      */
     run: function runCalendarSlide(slide, region) {
-      region.itkLog.info("Running calendar slide: " + slide.title);
+      region.itkLog.info("Running calendar slide: " + slide.title);      
 
       var duration = slide.duration !== null ? slide.duration : 15;
 
-      // Set slide headers
+      // The headers array iterated by the view template. (Not available in edit-template)
       slide.headers = [];
 
-      var headers = slide.options.headers;
-      var events = slide.options.eventitems;
-
-      var now = new Date();
-      var today = (new Date()).setHours(0,0,0,0);
-
-      for (var i = 0; i < headers.length; i++) { 
-        var header = (new Date(headers[i] * 1000)) 
- 
-        // It's in the future - push it
-        if (header > today) {
-          slide.headers.push(headers[i]);
+      /**
+       * Helper function to tjek events occuring today
+       * Has today event occured?
+       *
+       *
+       * @param when
+       *   Unix-timestamp.
+       */
+      var hasOccured = function hasOccured(when) {
+        var now = new Date();
+        var today = (new Date()).setHours(0,0,0,0);
+        var jWhen = new Date(when * 1000);
+        var jWhenStart = (new Date(when * 1000)).setHours(0,0,0,0);
+        if ((now - today) < (jWhen - jWhenStart)) {
+          return false;
         }
-        // Header is today - do we have an active event or is it too late?
-        else if (header == today) {
-          for (var i = 0; i < events.length; i++) {
-            event = events[i];
+      };
 
-            //Is this event running today? If header is in dateheaders - then yes.
-            if (event.dateheaders.indexOf(headers[i])) {
+      /**
+       * Filter out past header dates.
+       * We have to take current time af day into account.
+       *
+       *
+       * @param headers
+       *   All the dates that have events. Array of unix-timestamps with time set to 00:00.
+       * @param events
+       *   All the event-items of the slide. Array.
+       */
+      var filterEventHeaders = function filterEventHeaders(headers, events) {
+        
+        
 
-              // Has event occurred?
-              if (event.from && event.to) {
-                var to = new Date(event.to * 1000);
-                var toStart = (new Date(event.to * 1000)).setHours(0,0,0,0);
-                if ((now - today) < (to - toStart)) {
-                  slide.headers.push(headers[i]);
-                  break;
+        var now = new Date();
+        var today = (new Date()).setHours(0,0,0,0);
+        
+        for (var i = 0; i < headers.length; i++) { 
+          var header = headers[i] * 1000;
+
+          // It's in the future - push it
+          if (header > today) {
+            slide.headers.push(headers[i]);
+          }
+          // Header is today - do we have an active event or is it too late?
+          else if (header == today) {
+            for (var i = 0; i < events.length; i++) {
+              event = events[i];
+  
+              //Is this event running today? If header is in dateheaders - then yes.
+              if (event.dateheaders.indexOf(headers[i])) {
+  
+                // Has event occurred?
+                if (event.from && event.to) {
+                  if (!hasOccured(event.to)) {
+                    slide.headers.push(headers[i]);
+                    break;
+                  }
                 }
-              }
-              else if (event.from) {
-                var from = new Date(event.from * 1000);
-                var fromStart = (new Date(event.from * 1000)).setHours(0,0,0,0);
-                if ((now - today) < (from - fromStart)) {
-                  slide.headers.push(headers[i]);
-                  break;
+                else if (event.from) {
+                  if (!hasOccured(event.from)) {
+                    slide.headers.push(headers[i]);
+                    break;
+                  }
                 }
-
               }
             }
-          }
-        }  
-      }   
+          }  
+        }   
+      };
+
+      filterEventHeaders(slide.options.headers, slide.options.eventitems)
+
+    
 
       // Wait fadeTime before start to account for fade in.
       region.$timeout(function () {
