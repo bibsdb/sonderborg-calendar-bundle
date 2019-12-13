@@ -9,7 +9,7 @@
           </header>
           <div class="manual-calendar--event" data-ng-repeat="event in (actualEvents = (ikSlide.options.eventitems | activeEvents | orderBy: 'from' | limitTo : ikSlide.options.displayitems))">
             <div data-ng-repeat="eventdate in event.dateheaders">
-              <div ng-if="eventdate == header" class="manual-calendar--row" data-ng-class="$even ? 'manual-calendar--row-1' : 'manual-calendar--row-2'">
+              <div ng-if="eventdate == header" class="manual-calendar--row">
                 <section class="manual-calendar--time">
                   <span class="manual-calendar--to">{{event.displaytime}}</span> 
                 </section>

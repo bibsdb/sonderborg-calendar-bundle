@@ -121,6 +121,13 @@
     margin: 0px;
   }
 
+  &--event:nth-child(odd) {
+    background-color: #0f3752;
+  }
+
+  &--event:nth-child(even) {
+    background-color: #0f2d43;
+  }
 
   &--row {
     clear: both;
@@ -134,20 +141,6 @@
     display: flex;
     font-size: 200%;
   }
-
-
-  &--row-1 {
-    background-color: #0f3752;
-  }
-
-  &--row-2 {
-    background-color: #0f2d43;
-  }
-
-  &--row-3 {
-    background-color: #0f283d
-  }
-
 
   &--time {
     border: 0px;
